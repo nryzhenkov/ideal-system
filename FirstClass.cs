@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace MyArray
 {
     static public class FirstClass
@@ -22,7 +23,7 @@ namespace MyArray
 
     public class SecondClass
     {
-        int[] localArray;
+        public int[] localArray { get; set; }
 
         bool isNull;
 
@@ -45,6 +46,38 @@ namespace MyArray
         {
             localArray = null;
             isNull = true;
+        }
+
+        public void InitRandom()
+        {
+            Random random = new Random();
+            for (int i = 0; i < localArray.Length; i++)
+                localArray[i] = random.Next(0, 10) - 5;
+        }
+
+        public void Sort1()
+        {
+            int k = 0;
+            int a = 0;
+            for (int i = 0; i < localArray.Length - k; i++)
+            {
+                if (localArray[i] >= 0)
+                {
+                    continue;
+                }
+                if (localArray[i] < 0)
+                {
+                    for (int j = i; j < localArray.Length - k - 1; j++)
+                    {
+                        a = localArray[j];
+                        localArray[j] = localArray[j + 1];
+                        localArray[j + 1] = a;
+                    }
+                    k++;
+                    i--;
+                }
+
+            }
         }
 
         public bool CreateArray(int size)
