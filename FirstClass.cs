@@ -25,6 +25,8 @@ namespace MyArray
     {
         public int[] localArray { get; set; }
 
+        public int mulArray { get; set; }
+
         bool isNull;
 
         public SecondClass(int size)
@@ -54,30 +56,77 @@ namespace MyArray
             for (int i = 0; i < localArray.Length; i++)
                 localArray[i] = random.Next(0, 10) - 5;
         }
-
+        // сортирует массив таким образом, что сначала располагаются все положительные элементы (0 положительное)
         public void Sort1()
         {
-            int k = 0;
-            int a = 0;
-            for (int i = 0; i < localArray.Length - k; i++)
+            if (!isNull)
             {
-                if (localArray[i] >= 0)
+                int k = 0;
+                int a = 0;
+                for (int i = 0; i < localArray.Length - k; i++)
                 {
-                    continue;
-                }
-                if (localArray[i] < 0)
-                {
-                    for (int j = i; j < localArray.Length - k - 1; j++)
+                    if (localArray[i] >= 0)
                     {
-                        a = localArray[j];
-                        localArray[j] = localArray[j + 1];
-                        localArray[j + 1] = a;
+                        continue;
                     }
-                    k++;
-                    i--;
+                    if (localArray[i] < 0)
+                    {
+                        for (int j = i; j < localArray.Length - k - 1; j++)
+                        {
+                            a = localArray[j];
+                            localArray[j] = localArray[j + 1];
+                            localArray[j + 1] = a;
+                        }
+                        k++;
+                        i--;
+                    }
+
+                }
+            }
+        }
+        // произведение элементов массива, расположенных между максимальным по модулю и минимальным по модулю элементами
+        public void Mul1()
+        {
+            if (!isNull)
+            {
+                int max, min, maxInd, minInd, mulArr;
+                max = min = Math.Abs(localArray[0]);
+                maxInd = minInd = 0;
+                mulArr = 1;
+                for (int i = 1; i < localArray.Length; i++)
+                {
+                    if(Math.Abs(localArray[i]) > max)
+                    {
+                        max = Math.Abs(localArray[i]);
+                        maxInd = i;
+                        continue;
+                    }
+                    if(Math.Abs(localArray[i]) < min)
+                    {
+                        min = Math.Abs(localArray[i]);
+                        minInd = i;
+                        continue;
+                    }
+                }
+                if(minInd == maxInd)
+                {
+                    mulArray = localArray[minInd];
+                }
+                if(minInd > maxInd)
+                {
+                    for (int i = maxInd; i <= minInd; i++)
+                        mulArr *= localArray[i];
+                    mulArray = mulArr;
+                }
+                if(minInd < maxInd)
+                {
+                    for (int i = minInd; i <= maxInd; i++)
+                        mulArr *= localArray[i];
+                    mulArray = mulArr;
                 }
 
             }
+            
         }
 
         public bool CreateArray(int size)
