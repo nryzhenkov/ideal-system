@@ -50,11 +50,11 @@ namespace MyArray
             isNull = true;
         }
 
-        public void InitRandom()
+        public void InitRandom(int maxRand, int offset)
         {
             Random random = new Random();
             for (int i = 0; i < localArray.Length; i++)
-                localArray[i] = random.Next(0, 10) - 5;
+                localArray[i] = random.Next(0, maxRand) - offset; 
         }
         // сортирует массив таким образом, что сначала располагаются все положительные элементы (0 положительное)
         public void Sort1()
