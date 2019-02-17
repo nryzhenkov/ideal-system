@@ -147,6 +147,25 @@ namespace MyArray
                 }
             }
         }
+        // преобразует массив такм образом, что в коннце идут 0
+        public void Sort3()
+        {
+            if (!isNull)
+            {
+                int a = localArray.Length - 1;
+                int b = 0;
+                for (int i = localArray.Length - 1; i >= 0; i--)
+                {
+                    if (localArray[i] == 0)
+                    {
+                        b = localArray[a];
+                        localArray[a] = localArray[i];
+                        localArray[i] = b;
+                        a--;
+                    }
+                }
+            }
+        }
         public bool CreateArray(int size)
         {
             if (isNull)
